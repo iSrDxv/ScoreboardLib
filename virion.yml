@@ -1,1 +1,9 @@
+name: ScoreboardLib
 
+api: 4.0.0
+
+antigen: isrdxv\scoreboard
+
+version: 1.0.0
+
+authors: [iSrDxv]
