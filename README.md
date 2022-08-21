@@ -7,7 +7,7 @@ First declare the file as:
 
 ```php
 
-use libs\scoreboard\Scoreboard
+use isrdxv\scoreboard\Scoreboard
 
 ```
 
