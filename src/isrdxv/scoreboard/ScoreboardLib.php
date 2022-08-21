@@ -111,7 +111,9 @@ class Scoreboard
   public function spawn(): void 
 
   {
-
+    if (!$this->player->isOnline()) {
+      return;
+    }
     if (!$this->spawned) {
 
       $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->getPlayer()->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
