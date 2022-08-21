@@ -18,7 +18,7 @@
 
 */
 
-namespace libs\scoreboard;
+namespace isrdxv\scoreboard;
 
 use pocketmine\player\Player;
 
@@ -36,7 +36,7 @@ use pocketmine\network\mcpe\protocol\{
 
 use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;
 
-class Scoreboard
+class ScoreboardLib
 
 {
 
