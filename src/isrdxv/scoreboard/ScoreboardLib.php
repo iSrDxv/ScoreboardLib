@@ -14,7 +14,7 @@
 
 * @author: iSrDxv (SrClau)
 
-* @status: Beta
+* @status: Stable
 
 */
 
