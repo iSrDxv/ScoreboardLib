@@ -15,7 +15,7 @@ Then create the instance with the 'Player Class' and 'Title', in this case ``Tes
 
 ```php
 
-// must have class: pocketmine\player\Player, or one defined by you
+// must have class: pocketmine\player\Player
 
 $scoreboard = Scoreboard::create($player, "Test Scoreboard");
 
