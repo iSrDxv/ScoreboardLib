@@ -271,9 +271,6 @@ class ScoreboardLib
     $this->player->getNetworkSession()->sendDataPacket($pk);
 
     $this->lines = [];
-
-    }
-
   }
 
 }
