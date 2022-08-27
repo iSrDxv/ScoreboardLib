@@ -185,7 +185,7 @@ class ScoreboardLib
     $this->lines[$line] = $entry;
     
 
-    $pk = SetScorePacket(
+    $pk = SetScorePacket();
     $pk->type = SetScorePacket::TYPE_CHANGE;
     $pk->entries[] = $entry;
 
@@ -265,22 +265,15 @@ class ScoreboardLib
 
     }
 
-    foreach($this->lines as $line) {
 
-      $pk = new SetScorePacket();
+    $pk = new SetScorePacket(SetScorePacket::TYPE_REMOVE, array_values($this->lines));
 
-      $pk->type = SetScorePacket::TYPE_REMOVE;
+    $this->player->getNetworkSession()->sendDataPacket($pk);
 
-      $pk->entries[] = $line;
-
-      $this->player->getNetworkSession()->sendDataPacket($pk);
-
-      $this->lines = [];
+    $this->lines = [];
 
     }
 
   }
-
-  
 
 }
