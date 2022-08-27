@@ -116,9 +116,9 @@ class ScoreboardLib
     }
     if (!$this->spawned) {
 
-      $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->getPlayer()->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
+      $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->player->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
 
-      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+      $this->player->getNetworkSession()->sendDataPacket($pk);
 
       $this->spawned = true;
 
@@ -142,9 +142,9 @@ class ScoreboardLib
 
     $this->spawned = false;
 
-    $pk = RemoveObjectivePacket::create($this->getPlayer()->getName());
+    $pk = RemoveObjectivePacket::create($this->player->getName());
 
-    $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+    $this->player->getNetworkSession()->sendDataPacket($pk);
 
   }
 
@@ -156,9 +156,11 @@ class ScoreboardLib
 
     if (isset($this->line[$line])) {
 
-      $pk = new SetScorePacket(SetScorePacket::TYPE_REMOVE, [$this->lines[$line]]);
+      $pk = new SetScorePacket();
+      $pk->type = SetScorePacket::TYPE_REMOVE;
+      $pk->entries[] = $this->lines[$line];
 
-      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+      $this->player->getNetworkSession()->sendDataPacket($pk);
 
       unset($this->lines[$line]);
 
@@ -178,21 +180,16 @@ class ScoreboardLib
 
     $entry->customName = $description;
 
-    $entry->objectiveName = $this->getPlayer()->getName();
+    $entry->objectiveName = $this->player->getName();
 
     $this->lines[$line] = $entry;
-
     
 
-    $entries = [];
+    $pk = SetScorePacket(
+    $pk->type = SetScorePacket::TYPE_CHANGE;
+    $pk->entries[] = $entry;
 
-    $entries[] = $entry;
-
-    
-
-    $pk = SetScorePacket::create(SetScorePacket::TYPE_CHANGE, $entries);
-
-    $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+    $this->player->getNetworkSession()->sendDataPacket($pk);
 
   }
 
@@ -216,7 +213,7 @@ class ScoreboardLib
 
       $entry->customName = $lines[$i];
 
-      $entry->objectiveName = $this->getPlayer()->getName();
+      $entry->objectiveName = $this->player->getName();
 
       
 
@@ -230,7 +227,7 @@ class ScoreboardLib
 
     $pk = SetScorePacket::create(SetScorePacket::TYPE_CHANGE, $entries);
 
-    $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+    $this->player->getNetworkSession()->sendDataPacket($pk);
 
   }
 
@@ -240,19 +237,17 @@ class ScoreboardLib
 
   {
 
-    $line = $this->lines[$id];
-
-    if (isset($line)) {
+    if (isset($this->lines[$id])) {
 
       $pk = new SetScorePacket();
 
       $pk->type = SetScorePacket::TYPE_REMOVE; 
 
-      $pk->entries[] = $line;
+      $pk->entries[] = $this->lines[$id];
 
-      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+      $this->player->getNetworkSession()->sendDataPacket($pk);
 
-      unset($line);
+      unset($this->lines[$id]);
 
     }
 
@@ -278,7 +273,7 @@ class ScoreboardLib
 
       $pk->entries[] = $line;
 
-      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+      $this->player->getNetworkSession()->sendDataPacket($pk);
 
       $this->lines = [];
 
