@@ -60,7 +60,7 @@ class ScoreboardLib
 
   /** @var Player **/
 
-  public Player $player;
+  private Player $player;
 
   
 
@@ -68,13 +68,13 @@ class ScoreboardLib
 
   
 
-  public bool $spawned = false;
+  private bool $spawned = false;
 
   
 
   /** @var ScorePacketEntry[] **/
 
-  public array $lines = [];
+  private array $lines = [];
 
   
 
