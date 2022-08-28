@@ -246,7 +246,7 @@ class ScoreboardLib
 
   {
 
-    if (empty($this->lines) & ($this->spawned !== true)) {
+    if (empty($this->lines) && !$this->player->isOnline() && !$this->spawned) {
 
       return;
 
