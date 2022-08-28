@@ -156,10 +156,7 @@ class ScoreboardLib
 
     if (isset($this->line[$line])) {
 
-      $pk = new SetScorePacket();
-      $pk->type = SetScorePacket::TYPE_REMOVE;
-      $pk->entries[] = $this->lines[$line];
-
+      $this->removeLine($line);
       $this->player->getNetworkSession()->sendDataPacket($pk);
 
       unset($this->lines[$line]);
@@ -167,7 +164,7 @@ class ScoreboardLib
       return;
 
     }
-
+    $this->removeLine($line);
     $entry = new ScorePacketEntry();
 
     $entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
