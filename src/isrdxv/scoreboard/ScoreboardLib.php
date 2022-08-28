@@ -154,16 +154,6 @@ class ScoreboardLib
 
   {
 
-    if (isset($this->line[$line])) {
-
-      $this->removeLine($line);
-      $this->player->getNetworkSession()->sendDataPacket($pk);
-
-      unset($this->lines[$line]);
-
-      return;
-
-    }
     $this->removeLine($line);
     $entry = new ScorePacketEntry();
 
