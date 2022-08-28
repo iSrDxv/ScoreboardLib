@@ -246,7 +246,7 @@ class ScoreboardLib
 
   {
 
-    if (empty($this->lines) & ($this->spawned !== false)) {
+    if (empty($this->lines) & ($this->spawned !== true)) {
 
       return;
 
